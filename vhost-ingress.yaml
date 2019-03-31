@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: vhost-ingress
+spec:
+  rules:
+  - host: customexample.com    
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginx-test1
+          servicePort: 80
+      - path: /test
+        backend:
+          serviceName: nginx-test2
+          servicePort: 80
+  - host: test3.customexample.com    .
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginx-test3
+          servicePort: 80
+  - host: customexample.com    
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginx-test4
+          servicePort: 80
