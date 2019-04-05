@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kubernetes.io/change-cause: "Updated to 1.5.3"
+  labels:
+    run: web-app
+  name: web-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      run: web-app-dp
+  minReadySeconds: 5
+  revisionHistoryLimit: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: web-app-dp
+    spec:
+      containers:
+      - image: ikambarov/web-app:1.5.3
+        name: web-app
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
