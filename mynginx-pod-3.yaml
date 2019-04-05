@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mynginx-pod-3
+spec:
+  containers:
+  - image: evolvecybertraining/mynginx
+    name: mynginx
